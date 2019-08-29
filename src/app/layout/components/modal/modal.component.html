@@ -1,0 +1,23 @@
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">Widget Catalog</h3>
+  <div class="modal-body">
+    <p>Here would live a collection of Widgets to choose from.</p>
+    <clr-icon class="shape" shape="bar-chart" size="118">
+
+    </clr-icon>
+    <clr-icon class="shape" shape="line-chart" size="118">
+      
+    </clr-icon>
+    <clr-icon class="shape" shape="pie-chart"size="118">
+
+    </clr-icon>
+    <clr-icon class="shape" shape="curve-chart"size="118">
+
+    </clr-icon>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="open = false">
+      Ok
+    </button>
+  </div>
+</clr-modal>
