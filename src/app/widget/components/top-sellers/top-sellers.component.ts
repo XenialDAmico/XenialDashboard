@@ -8,7 +8,6 @@ import {
   LayoutActionTypes,
   WindowResized
 } from "src/app/layout/store/actions/layout.actions";
-import { HttpClient } from '@angular/common/http';
 import { ProductSalesModel } from "../../models/topsellers.model";
 import { ProductSales } from "./top-sellers-data";
 import { columnDefs } from "./top-sellers-options";

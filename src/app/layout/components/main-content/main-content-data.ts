@@ -28,11 +28,11 @@ export const mainContentWidgets: WidgetItem[] = [
   },
   {
     cols: 2,
-    rows: 3,
+    rows: 2,
     y: 4,
     x: 0,
-    widgetId: WidgetType.DataTable,
-    widgetName: WidgetName.DataTable
+    widgetId: WidgetType.TopSellers,
+    widgetName: WidgetName.TopSellers
   },
   {
     cols: 4,
@@ -44,11 +44,11 @@ export const mainContentWidgets: WidgetItem[] = [
   },
 
   {
-    cols: 2,
-    rows: 3,
-    y: 4,
+    cols: 3,
+    rows: 2,
+    y: 2,
     x: 3,
-    widgetId: WidgetType.TopSellers,
-    widgetName: WidgetName.TopSellers
+    widgetId: WidgetType.DataTable,
+    widgetName: WidgetName.DataTable
   }
 ];
