@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit} from "@angular/core";
 import { Actions, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
-import * as embed from 'vega-embed';
-import * as vega from 'vega';
+import { VegaConfigsService } from "src/app/core/services/vega.service"
 import { Subscription } from "rxjs";
 import { AppState } from "src/app/core/store/reducers";
 import { getThemeType } from "src/app/core/store/reducers/theme.reducer";
@@ -12,12 +11,8 @@ import {
   VegaWidgetResized
 } from "src/app/layout/store/actions/layout.actions";
 import { LineChartInitConfig } from "./line-chart-options";
+import { MainContentComponent } from "src/app/layout/components/main-content/main-content.component"
 
-const vegaOpts: any = {
-  actions: false,
-  renderType: 'svg',
-  mode: 'vega'
-  }
 
 
 @Component({
@@ -34,19 +29,22 @@ export class LineChartComponent implements OnInit, OnDestroy {
   private themeSubscription: Subscription;
   private resizeSubscription: Subscription;  
 
-  constructor(private store: Store<AppState>, private action$: Actions) {}
+  constructor(private store: Store<AppState>, private action$: Actions, private vegaConfigService: VegaConfigsService, private thisGridster: MainContentComponent) {}
    
 
 
   ngOnInit(): void {
-  
+    var width = this.thisGridster.vegaLength;
+    width = width - 50;
+    //var width = this.vegaConfigService.getChartWidth(".gridster-item-content");
+    console.log("Width is resized to " + width)
+    var length = this.vegaConfigService.getChartHeight(".gridster-item-content");
+    length = length - 60;
+    console.log("Length is resized to " + length)
     console.log("embedding..");
-    // this.view = embed.default('#vega',LineChartInitConfig,vegaOpts);
-     vegaOpts.view = new vega.View(vega.parse(LineChartInitConfig))
-     .renderer(vegaOpts.renderType)
-     .resize()
-     .initialize('#vega')
-     .run();
+     //this.view = embed.default('#vega',LineChartInitConfig,vegaOpts);
+     this.view = this.vegaConfigService.vegaInit("vega",LineChartInitConfig,width,length); 
+
 
     this.themeSubscription = this.store
     .pipe(select(getThemeType))
@@ -57,8 +55,13 @@ export class LineChartComponent implements OnInit, OnDestroy {
   this.resizeSubscription = this.action$
     .pipe(ofType<VegaWidgetResized>(LayoutActionTypes.VegaWidgetResized))
     .subscribe(() => {
-      this.resizeVegaChart();
-    });
+      var width = this.thisGridster.vegaWidth;
+      width = width - 50;
+      console.log("Width is resized to " + width)
+      var length = this.thisGridster.vegaLength;
+      length = length - 60;
+      console.log("Length is resized to " + length)
+      this.resizeVegaChart(width,length)});
   }
 
   ngOnDestroy(): void {
@@ -66,17 +69,12 @@ export class LineChartComponent implements OnInit, OnDestroy {
     this.resizeSubscription.unsubscribe();
   }
 
-  resizeVegaChart(): void {
-
-    
-
-    if (vegaOpts.view) {
+  resizeVegaChart(width,length): void {
+    if (this.view) {
       setTimeout(() => {
         console.log("resizing Vega Chart..")
-        vegaOpts.view = new vega.View(vega.parse(LineChartInitConfig))
-        .renderer(vegaOpts.renderType)
-        .resize()
-        .run()
+        this.vegaConfigService.vegaInit("vega",LineChartInitConfig,width,length); 
+        
       }, 400);
     }
   }

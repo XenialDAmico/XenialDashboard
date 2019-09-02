@@ -33,6 +33,8 @@ import { mainContentWidgets } from "./main-content-data";
 export class MainContentComponent implements OnInit, OnDestroy {
   widgets: WidgetItem[] = mainContentWidgets;
   theme: string;
+  vegaLength: number;
+  vegaWidth: number;
 
   private themeSubscription: Subscription;
 
@@ -61,10 +63,15 @@ export class MainContentComponent implements OnInit, OnDestroy {
     itemComponent: GridsterItemComponentInterface
   ): void => {
     console.info("onItemResize", item, itemComponent);
+    
     if (item.widgetId === WidgetType.DataTable) {
+      console.log("Width of AG Grid is " + itemComponent.width)
       this.store.dispatch(new TableWidgetResized());
     }
     if (item.widgetId === WidgetType.LineChart) {
+      this.vegaLength = itemComponent.height;
+      this.vegaWidth = itemComponent.width;
+      console.log("Width of Chart is " + this.vegaLength)
       this.store.dispatch(new VegaWidgetResized());
     }
   };

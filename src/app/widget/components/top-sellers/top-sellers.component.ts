@@ -9,7 +9,7 @@ import {
   WindowResized
 } from "src/app/layout/store/actions/layout.actions";
 import { ProductSalesModel } from "../../models/topsellers.model";
-import { ProductSales } from "./top-sellers-data";
+import { ProductSalesData } from "./top-sellers-data";
 import { columnDefs } from "./top-sellers-options";
 
 @Component({
@@ -19,7 +19,7 @@ import { columnDefs } from "./top-sellers-options";
 })
 export class TopSellersComponent implements OnInit, OnDestroy {
   theme: string;
-  rowData: ProductSalesModel[] = ProductSales;
+  rowData: ProductSalesModel[] = ProductSalesData;
   columnDefs: any = columnDefs;
   pagination: false;
 

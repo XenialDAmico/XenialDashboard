@@ -1,6 +1,6 @@
 import { ProductSalesModel } from "../../models/topsellers.model";
 
-export const ProductSales: ProductSalesModel[] = [
+export const ProductSalesData: ProductSalesModel[] = [
   {
     name: "Small Diet Coke",
     id: 102,
