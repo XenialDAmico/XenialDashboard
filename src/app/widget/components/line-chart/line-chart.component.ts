@@ -34,11 +34,11 @@ export class LineChartComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    var width = this.thisGridster.vegaLength;
+    var width = this.thisGridster.vegaWidth;
     width = width - 50;
     //var width = this.vegaConfigService.getChartWidth(".gridster-item-content");
     console.log("Width is resized to " + width)
-    var length = this.vegaConfigService.getChartHeight(".gridster-item-content");
+    var length = this.thisGridster.vegaLength;
     length = length - 60;
     console.log("Length is resized to " + length)
     console.log("embedding..");

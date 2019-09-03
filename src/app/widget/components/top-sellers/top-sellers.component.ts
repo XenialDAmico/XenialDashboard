@@ -10,7 +10,7 @@ import {
 } from "src/app/layout/store/actions/layout.actions";
 import { ProductSalesModel } from "../../models/topsellers.model";
 import { ProductSalesData } from "./top-sellers-data";
-import { columnDefs } from "./top-sellers-options";
+import { tsColumnDefs } from "./top-sellers-options";
 
 @Component({
   selector: "app-top-sellers",
@@ -19,8 +19,14 @@ import { columnDefs } from "./top-sellers-options";
 })
 export class TopSellersComponent implements OnInit, OnDestroy {
   theme: string;
-  rowData: ProductSalesModel[] = ProductSalesData;
-  columnDefs: any = columnDefs;
+
+  columnDefs: any = tsColumnDefs;
+  rowData: ProductSalesModel[]; 
+  
+  private gridApi: any;
+  private gridColumnApi: any;
+  
+
   pagination: false;
 
 
@@ -29,11 +35,15 @@ export class TopSellersComponent implements OnInit, OnDestroy {
   
   
 
-  constructor(private store: Store<AppState>, private action$: Actions) {}
+  constructor(private store: Store<AppState>, private action$: Actions) {
+    this.rowData = ProductSalesData;
+
+
+  }
 
   ngOnInit(): void {
     
-    
+
 
     this.themeSubscription = this.store
       .pipe(select(getThemeType))
@@ -53,7 +63,12 @@ export class TopSellersComponent implements OnInit, OnDestroy {
     this.resizeSubscription.unsubscribe();
   }
 
-  
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    this.rowData = ProductSalesData;
+
+  }
 
   
 }

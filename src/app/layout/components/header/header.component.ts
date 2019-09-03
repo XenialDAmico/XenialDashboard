@@ -4,6 +4,7 @@ import * as uuid from 'uuid';
 import { select, Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
 import { ThemeService } from "src/app/core/services/theme.service";
+import { GridService } from "src/app/core/services/grid.service";
 import {
   SetDarkTheme,
   SetLightTheme
@@ -26,7 +27,8 @@ export class HeaderComponent {
 
   constructor(
     private store: Store<AppState>,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private gridService: GridService
   ) {}
 
   ngOnInit(): void {
@@ -50,14 +52,7 @@ export class HeaderComponent {
 
   addWidget(): void {
       console.log("adding panel")
-      
-      // this.layout.push({
-      //   cols: 1,
-      //   id: uuid.v4(),
-      //   rows: 1,
-      //   x: 0,
-      //   y: 0
-      // });      
+      this.gridService.addWidget("New")    
   }
 
   removeWidget(id: string): void {

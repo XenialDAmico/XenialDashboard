@@ -4,7 +4,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { NgxEchartsModule } from "ngx-echarts";
 import { AgGridModule } from 'ag-grid-angular';
-import { HttpClientModule } from '@angular/common/http';
 import { BarChartComponent } from "./components/bar-chart/bar-chart.component";
 import { DataTableComponent } from "./components/data-table/data-table.component";
 import { DynamicWidgetComponent } from "./components/dynamic-widget/dynamic-widget.component";
@@ -16,7 +15,13 @@ import { DynamicWidgetDirective } from "./directives/dynamic-widget.directive";
 import { WidgetService } from "./services/dynamic-widget.service";
 
 @NgModule({
-  imports: [CommonModule, NgxEchartsModule, BrowserModule, NgxDatatableModule,AgGridModule.withComponents([])],
+  imports: [CommonModule, 
+            NgxEchartsModule, 
+            BrowserModule, 
+            NgxDatatableModule,
+            AgGridModule.withComponents(
+              TopSellersComponent
+            )],
   declarations: [
     DynamicWidgetComponent,
     DynamicWidgetDirective,

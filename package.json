@@ -31,6 +31,7 @@
     "@webcomponents/custom-elements": "1.2.4",
     "ag-grid-angular": "^21.1.0",
     "ag-grid-community": "^21.1.1",
+    "ag-grid-enterprise": "^21.2.0",
     "angular-gridster2": "8.0.0",
     "angular-uuid": "0.0.4",
     "classlist.js": "^1.1.20150312",

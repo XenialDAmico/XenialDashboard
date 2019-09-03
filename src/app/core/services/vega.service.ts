@@ -26,28 +26,12 @@ export class VegaConfigsService {
     return new vega.View(vega.parse(vegaSpec, vegaTheme))
       .tooltip(handlerTooltip.call)
       .renderer('svg')          // set renderer (canvas or svg
-      .initialize('#' + id)// initialize view within parent DOM container
+      .initialize('#' + id)     // initialize view within parent DOM container
       .resize()
-      .width(width)               // set chart width
-      .height(height)              // set chart height
+      .width(width)             // set chart width
+      .height(height)           // set chart height
       .hover()                  // enable hover encode set processing
       .run()
-  }
-
-
-
-  public getChartWidth(id) {
-    var a = $(id).parent();
-    console.log("Parent Element Name: " + a.attr('name'));
-    var width = a.outerWidth(true);
-    console.log("Width of " + a + " is " + width);
-    return width
-    
-  }
-
-  public getChartHeight(id) {
-    var length = $(id).parent().length - 30
-    return length;
   }
 
 

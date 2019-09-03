@@ -1,8 +1,10 @@
-<ag-grid-angular 
-    
-    class="ag-theme-balham"
+<div>
+    <ag-grid-angular class="ag-theme-material"
     [rowData]="rowData" 
+    [gridOptions]="gridOptions"
     [columnDefs]="columnDefs"
-    
-    >
+    [debug]="true"
+    (gridReady)="onGridReady($event)"
+>
 </ag-grid-angular>
+</div>

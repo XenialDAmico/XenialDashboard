@@ -29,12 +29,15 @@
               "node_modules/@swimlane/ngx-datatable/release/index.css",
               "node_modules/@swimlane/ngx-datatable/release/themes/material.css",
               "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-balham.css",
               "src/styles.scss"
             ],
             "scripts": [
               "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
               "node_modules/@clr/icons/clr-icons.min.js",
-              "node_modules/@jquery/dist/jquery.js"
+              "node_modules/@jquery/dist/jquery.js",
+              "node_modules/ag-grid-enterprise/dist/ag-grid-enterprise.js"
+              
             ]
           },
           "configurations": {
