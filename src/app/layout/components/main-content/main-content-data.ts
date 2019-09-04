@@ -27,7 +27,7 @@ export const mainContentWidgets: WidgetItem[] = [
     widgetName: WidgetName.BarChart
   },
   {
-    cols: 2,
+    cols: 4,
     rows: 2,
     y: 4,
     x: 0,

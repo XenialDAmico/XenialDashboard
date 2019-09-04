@@ -8,7 +8,7 @@ import {
 export const gridConfig: GridsterConfig = {
   gridType: GridType.ScrollVertical,
   compactType: CompactType.None,
-  margin: 20,
+  margin: 15,
   outerMargin: true,
   outerMarginTop: null,
   outerMarginRight: null,
@@ -16,7 +16,7 @@ export const gridConfig: GridsterConfig = {
   outerMarginLeft: null,
   useTransformPositioning: true,
   mobileBreakpoint: 640,
-  minCols: 6,
+  minCols: 4,
   maxCols: 12,
   minRows: 2,
   maxRows: 100,

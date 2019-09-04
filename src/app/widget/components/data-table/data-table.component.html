@@ -1,31 +1,12 @@
-<ngx-datatable
-  class="data-table-component"
-  [rows]="rows"
-  [headerHeight]="50"
-  [footerHeight]="50"
-  [columnMode]="'force'"
-  [rowHeight]="'auto'"
-  [scrollbarH]="true"
-  [ngClass]="theme"
+
+<ag-grid-angular class="ag-theme-material"
+style="width: 100%; height: 100%;" 
+[rowData]="rowData" 
+[gridOptions]="gridOptions"
+[columnDefs]="columnDefs"
+[debug]="true"
+(gridReady)="onGridReady($event)"
+(gridSizeChanged)="onGridSizeChanged($event)"
 >
-  <ngx-datatable-column name="Store" [resizeable]="true" [canAutoResize]="true">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.name }}
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Transactions" [resizeable]="true" [canAutoResize]="true">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.qty }}
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column
-    name="Net Sales"
-    [resizeable]="true"
-    [canAutoResize]="true"
-    [sortable]="true"
-  >
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.sales  }}
-    </ng-template>
-  </ngx-datatable-column>
-</ngx-datatable>
+</ag-grid-angular>
+

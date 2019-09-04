@@ -33,8 +33,13 @@ import { mainContentWidgets } from "./main-content-data";
 export class MainContentComponent implements OnInit, OnDestroy {
   widgets: WidgetItem[] = mainContentWidgets;
   theme: string;
+  //Create a function to retrieve this.
   vegaLength: number;
   vegaWidth: number;
+  topSellersHeight: number;
+  topSellersWidth: number;
+  storePerformanceWidth: number;
+
 
   private themeSubscription: Subscription;
 
@@ -63,9 +68,15 @@ export class MainContentComponent implements OnInit, OnDestroy {
     itemComponent: GridsterItemComponentInterface
   ): void => {
     console.info("onItemResize", item, itemComponent);
-    
+    if (item.widgetId === WidgetType.TopSellers) {
+      console.log("Width of Top Sellers is " + itemComponent.width)
+      this.topSellersWidth=itemComponent.width;
+      this.topSellersHeight=itemComponent.height;
+      this.store.dispatch(new TableWidgetResized());
+    }
     if (item.widgetId === WidgetType.DataTable) {
       console.log("Width of AG Grid is " + itemComponent.width)
+      this.storePerformanceWidth=itemComponent.width;
       this.store.dispatch(new TableWidgetResized());
     }
     if (item.widgetId === WidgetType.LineChart) {

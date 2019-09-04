@@ -1,10 +1,11 @@
-<div>
-    <ag-grid-angular class="ag-theme-material"
+
+<ag-grid-angular class="ag-theme-material"
+    style="width: 100%; height: 100%;" 
     [rowData]="rowData" 
     [gridOptions]="gridOptions"
     [columnDefs]="columnDefs"
     [debug]="true"
     (gridReady)="onGridReady($event)"
+    (gridSizeChanged)="onGridSizeChanged($event)"
 >
 </ag-grid-angular>
-</div>
