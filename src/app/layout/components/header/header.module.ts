@@ -17,6 +17,7 @@ import { HeaderComponent } from "./header.component";
     ModalModule
   ],
   declarations: [HeaderComponent],
+
   exports: [HeaderComponent]
 })
 export class HeaderModule {}

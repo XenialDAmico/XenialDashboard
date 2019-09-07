@@ -4,7 +4,9 @@ export enum WidgetType {
   BarChart = 3,
   DataTable = 4,
   LineChart = 5,
-  TopSellers = 6
+  TopSellers = 6,
+  agGridChart = 7,
+  SDR = 8
 }
 
 export enum WidgetName {
@@ -13,5 +15,7 @@ export enum WidgetName {
   BarChart = "Product Sales",
   DataTable = "Store Performance",
   LineChart = "Labor Cost",
-  TopSellers = "Top Sellers"
+  TopSellers = "Top Sellers",
+  agGridChart = "Sales by Date",
+  SDR = "Sales Summary"
 }

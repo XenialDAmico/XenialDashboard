@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BarChartComponent } from "../components/bar-chart/bar-chart.component";
 import { LineChartComponent } from "../components/line-chart/line-chart.component";
 import { DataTableComponent } from "../components/data-table/data-table.component";
+import { agChartComponent } from "../components/ag-chart/ag-chart.component";
 import { PieChartComponent } from "../components/pie-chart/pie-chart.component";
 import { TopSellersComponent } from "../components/top-sellers/top-sellers.component";
 import { TextComponent } from "../components/text/text.component";
@@ -14,7 +15,8 @@ export class WidgetService {
     3: BarChartComponent,
     4: DataTableComponent,
     5: LineChartComponent,
-    6: TopSellersComponent
+    6: TopSellersComponent,
+    7: agChartComponent
   };
 
   getComponent(id: number) {

@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-header draggable-cursor">
     {{ widgetItem.widgetName }}
+    <button type="button" (click)="deleteItem(widget)" class="btn btn-icon float-sm-right" aria-label="settings">
+        <clr-icon shape="trash" size="18"></clr-icon>
+    </button>
   </div>
   <div class="gridster-item-content">
     <div class="card-block">

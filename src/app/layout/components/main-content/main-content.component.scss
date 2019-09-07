@@ -3,6 +3,9 @@ app-main-content {
   flex-direction: column;
   height: 100%;
 }
+button {
+  height: 20px;
+}
 
 .main-content-component {
   &.dark {

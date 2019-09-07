@@ -6,67 +6,71 @@ import { AppState } from "src/app/core/store/reducers";
 import { getThemeType } from "src/app/core/store/reducers/theme.reducer";
 import {
   LayoutActionTypes,
+  TableWidgetResized,
   WindowResized,
-  TopSellersWidgetResized
+  SDRWidgetResized
 } from "src/app/layout/store/actions/layout.actions";
-import { ProductSalesModel } from "../../models/topsellers.model";
-import { ProductSalesData } from "./top-sellers-data";
+import { SDRModel } from "../../models/stats-sdr.model";
+import { SDRData } from "./sdr-table-data";
 
 
 @Component({
-  selector: "app-top-sellers",
-  templateUrl: "./top-sellers.component.html",
-  styleUrls: ["./top-sellers.component.scss"]
+  selector: "sdr-data-table",
+  templateUrl: "./sdr-table.component.html",
+  styleUrls: ["./sdr-table.component.scss"]
 })
-export class TopSellersComponent implements OnInit, OnDestroy {
+export class SDRComponent implements OnInit, OnDestroy {
   theme: string;
 
-  rowData: ProductSalesModel[]; 
-  tsWidth: number;
-  tsHeight: number;
+  rowData: SDRModel[]; 
   
   private gridApi: any;
   private gridColumnApi: any;
 
   columnDefs: any =  [
-    {headerName: 'Name', field: 'name', sortable: true},
-    {headerName: 'Qty', field: 'qty',  sortable: true },
-    {headerName: 'Sales $', field: 'sales',  sortable: true}
+    {headerName: 'Store #', field: 'store_number', sortable: true},
+    {headerName: 'Date', field: 'date', sortable: true},
+    {headerName: 'Data Key', field: 'key', sortable: false},
+    {headerName: 'Qty', field: 'qty',  sortable: false },
+    {headerName: 'Amt', field: 'amount',  sortable: false}
+    
+    
   ];
   
-  
-
   pagination: false;
-
+   SDRWidth: any;
+   SDRHeight: any;
 
   private themeSubscription: Subscription;
   private resizeSubscription: Subscription;
-  private panelResizeSubscription: Subscription;
+  private panelsizeSubscription: Subscription;
+
 
   
 
   constructor(private store: Store<AppState>, private action$: Actions) {
     
-    this.rowData = ProductSalesData;
 
   }
 
   ngOnInit(): void {
 
-    
+
+    this.panelsizeSubscription = this.action$
+    .pipe(ofType<SDRWidgetResized>(LayoutActionTypes.SDRWidgetResized))
+    .subscribe((i) => {
+      console.log('SDR Widget Resized to ' + i.SDRWidth + ' pixels.');
+      this.SDRWidth=i.SDRWidth;
+      this.SDRHeight=i.SDRHeight;
+      
+    });
 
     this.themeSubscription = this.store
       .pipe(select(getThemeType))
       .subscribe((theme: string) => {
         this.theme = theme === "Dark" ? "dark" : "default";
       });
-    this.panelResizeSubscription = this.action$
-      .pipe(ofType<TopSellersWidgetResized>(LayoutActionTypes.TopSellersWidgetResized))
-      .subscribe((i) => {
-        console.log('Window Resized')
-        this.tsWidth=i.tsWidth;
-        this.tsHeight=i.tsHeight;
-      });
+
     this.resizeSubscription = this.action$
       .pipe(ofType<WindowResized>(LayoutActionTypes.WindowResized))
       .subscribe(() => {
@@ -80,10 +84,10 @@ export class TopSellersComponent implements OnInit, OnDestroy {
   }
 
   onGridReady(params) {
-    console.log("Ag-Grid Ready!")
+    console.log("SDR Widget Ready!")
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.rowData = ProductSalesData;
+    this.rowData = SDRData;
 
     params.api.sizeColumnsToFit();
     window.addEventListener("resize", function() {
@@ -93,11 +97,10 @@ export class TopSellersComponent implements OnInit, OnDestroy {
     });
 
   }
-
   onGridSizeChanged(params) {
-    var gridWidth = this.tsWidth;
-    console.log("Grid width is now " + gridWidth)
-    var columnsToShow = [];
+    
+    console.log("SDR Grid width is now " + this.SDRWidth)
+    var columnsToShow = [''];
     //Cant this to work yet. But ideally, the 'Qty' column would drop when widget is resized smaller.
     var columnsToHide = [''];
     var totalColsWidth = 0;
@@ -106,8 +109,7 @@ export class TopSellersComponent implements OnInit, OnDestroy {
       let column = allColumns[i];
       console.log("Min Column Width:  "  + column.getMinWidth());
       totalColsWidth += column.getMinWidth();
-      if (totalColsWidth > gridWidth) {
-        console.log("width of all columns is "  + totalColsWidth);
+      if (totalColsWidth > this.SDRWidth) {
         columnsToHide.push(column.colId);
       } else {
         columnsToShow.push(column.colId);

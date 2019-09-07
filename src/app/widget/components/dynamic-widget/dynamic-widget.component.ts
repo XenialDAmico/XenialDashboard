@@ -11,6 +11,9 @@ import {
 import { WidgetItem } from "src/app/layout/models/widget.model";
 import { DynamicWidgetDirective } from "../../directives/dynamic-widget.directive";
 import { WidgetService } from "../../services/dynamic-widget.service";
+import { gridConfig } from "src/app/layout/components/main-content/grid-config"
+import {mainContentWidgets} from "src/app/layout/components/main-content/main-content-data"
+import { GridsterConfig } from 'angular-gridster2';
 
 @Component({
   selector: "app-dynamic-widget",
@@ -20,6 +23,7 @@ import { WidgetService } from "../../services/dynamic-widget.service";
 export class DynamicWidgetComponent implements OnInit, OnDestroy {
   @Input()
   widgetItem: WidgetItem;
+  widgets: WidgetItem[] = mainContentWidgets;
 
   private componentFactory: ComponentFactory<any>;
   private viewContainerRef: ViewContainerRef;
@@ -51,4 +55,20 @@ export class DynamicWidgetComponent implements OnInit, OnDestroy {
       this.componentRef.destroy();
     }
   }
+
+  deleteItem(): void {
+    var myWidget  = this.widgets.indexOf(this.widgetItem);
+    console.log("Deleting Widget - " + this.widgetItem.widgetName)
+    this.widgets.splice(myWidget, 1);
+    if (this.options.api) {
+      console.log("Compact Type : " + this.options.compactType.toString)
+      this.options.compactType = "compactLeft&Up";
+      this.options.api.optionsChanged();
+    }
+  }
+
+  readonly options: GridsterConfig = {
+    ...gridConfig
+  }
+
 }

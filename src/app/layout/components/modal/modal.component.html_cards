@@ -26,9 +26,6 @@
               <h5 class="card-title">Speed of Service</h5>
               <p class="card-text">Chart that displays Speed of Service statistics by Hour.</p>
               <p class="card-text"><small class="text-muted">Bar Chart</small></p>
-              <button type="button" class="btn btn-icon float-sm-right" (click)="open = false">
-                  <clr-icon class="shape" shape="plus" size="42"></clr-icon>
-                </button>
             </div>
           </div>
         </div>
@@ -43,15 +40,11 @@
               <h5 class="card-title">Labor Cost</h5>
               <p class="card-text">Chart that displays Sales grouped by Destination.</p>
               <p class="card-text"><small class="text-muted">Pie Chart</small></p>
-              <button type="button" class="btn btn-icon float-sm-right" (click)="open = false">
-                  <clr-icon class="shape" shape="plus" size="42"></clr-icon>
-                </button>
             </div>
           </div>
         </div>
     </div>   
   </div>
-  
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="open = false">
       Ok

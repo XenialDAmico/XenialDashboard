@@ -2,3 +2,17 @@
 @import 'ag-grid-community/dist/styles/ag-grid.css';
 @import 'ag-grid-community/dist/styles/ag-theme-balham-dark.css';
 @import 'ag-grid-community/dist/styles/ag-theme-material.css';
+
+
+
+
+.button-bar {
+    padding-bottom: 4px;
+    height: 25px;
+}
+
+.button {
+    height: 20px;
+    font-size: small;
+    float: right;
+}

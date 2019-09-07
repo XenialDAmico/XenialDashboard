@@ -2,7 +2,7 @@ import { ProductSalesModel } from "../../models/topsellers.model";
 
 export const ProductSalesData: ProductSalesModel[] = [
   {
-    name: "Small Diet Coke",
+    name: "Small Rebel",
     id: 102,
     qty: 98,
     sales: 182.83
@@ -18,5 +18,11 @@ export const ProductSalesData: ProductSalesModel[] = [
     id: 302,
     qty: 82,
     sales: 293.43
+  },
+  {
+    name: "Vanilla Shot",
+    id: 302,
+    qty: 124,
+    sales: 153.29
   }
 ];

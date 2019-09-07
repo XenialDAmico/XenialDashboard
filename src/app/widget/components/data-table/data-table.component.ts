@@ -11,7 +11,6 @@ import {
 } from "src/app/layout/store/actions/layout.actions";
 import { StorePerformanceModel } from "../../models/store-performance.model";
 import { StorePerformanceData } from "./data-table-data";
-import { MainContentComponent } from "src/app/layout/components/main-content/main-content.component"
 
 
 @Component({
@@ -36,25 +35,33 @@ export class DataTableComponent implements OnInit, OnDestroy {
     
   ];
   
-  
-
   pagination: false;
-
+   agWidth: any;
+   agHeight: any;
 
   private themeSubscription: Subscription;
   private resizeSubscription: Subscription;
+  private panelsizeSubscription: Subscription;
+
 
   
 
-  constructor(private store: Store<AppState>, private action$: Actions,private thisGridster: MainContentComponent) {
+  constructor(private store: Store<AppState>, private action$: Actions) {
     
-    this.rowData = StorePerformanceData;
 
   }
 
   ngOnInit(): void {
-    
 
+
+    this.panelsizeSubscription = this.action$
+    .pipe(ofType<TableWidgetResized>(LayoutActionTypes.TableWidgetResized))
+    .subscribe((i) => {
+      console.log('Table Widget Resized to ' + i.tsWidth + ' pixels.');
+      this.agWidth=i.tsWidth;
+      this.agHeight=i.tsHeight;
+      
+    });
 
     this.themeSubscription = this.store
       .pipe(select(getThemeType))
@@ -89,19 +96,18 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   }
   onGridSizeChanged(params) {
-    var gridWidth = this.thisGridster.topSellersWidth
-    console.log("Grid width is now " + gridWidth)
-    var columnsToShow = [];
+    
+    console.log("Grid width is now " + this.agWidth)
+    var columnsToShow = [''];
     //Cant this to work yet. But ideally, the 'Qty' column would drop when widget is resized smaller.
     var columnsToHide = [''];
-    var totalColsWidth = gridWidth;
+    var totalColsWidth = 0;
     var allColumns = params.columnApi.getAllColumns();
     for (var i = 0; i < allColumns.length; i++) {
       let column = allColumns[i];
       console.log("Min Column Width:  "  + column.getMinWidth());
       totalColsWidth += column.getMinWidth();
-      if (totalColsWidth > gridWidth) {
-        console.log("width of all columns is "  + totalColsWidth);
+      if (totalColsWidth > this.agWidth) {
         columnsToHide.push(column.colId);
       } else {
         columnsToShow.push(column.colId);

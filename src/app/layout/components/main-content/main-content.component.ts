@@ -18,7 +18,8 @@ import { WidgetItem } from "../../models/widget.model";
 import {
   TableWidgetResized,
   WindowResized,
-  VegaWidgetResized
+  VegaWidgetResized,
+  SDRWidgetResized
 } from "../../store/actions/layout.actions";
 
 import { gridConfig } from "./grid-config";
@@ -32,6 +33,7 @@ import { mainContentWidgets } from "./main-content-data";
 })
 export class MainContentComponent implements OnInit, OnDestroy {
   widgets: WidgetItem[] = mainContentWidgets;
+  gridStr: [];
   theme: string;
   //Create a function to retrieve this.
   vegaLength: number;
@@ -39,11 +41,36 @@ export class MainContentComponent implements OnInit, OnDestroy {
   topSellersHeight: number;
   topSellersWidth: number;
   storePerformanceWidth: number;
+  agChartWidth: number;
+  SDRWidth: number;
 
 
   private themeSubscription: Subscription;
 
   constructor(private store: Store<AppState>) {}
+  addItem(): void {
+    this.widgets.push({widgetId:7,widgetName:"New",x:1,y:1, rows:2, cols:2});
+  }
+  deleteItem(id: string): void {
+    const item = this.widgets.find(d => d.id === id);
+    this.widgets.splice(this.widgets.indexOf(item), 1);
+    if (this.options.api) {
+      this.options.compactType = "compactLeft&Up";
+      this.options.api.optionsChanged();
+    }
+  }
+  compact(): void {
+    if (this.options.api) {
+      this.options.compactType = "compactLeft&Up";
+      this.options.api.optionsChanged();
+      this.options.compactType = "none";
+      this.options.api.optionsChanged();
+    }
+  }
+
+  getConfig(): void {
+    //this.options.
+  } 
 
   ngOnInit(): void {
     this.themeSubscription = this.store
@@ -63,6 +90,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
     console.info("onItemChange", item, itemComponent);
   };
 
+
+
   private readonly onItemResize = (
     item: WidgetItem,
     itemComponent: GridsterItemComponentInterface
@@ -72,18 +101,29 @@ export class MainContentComponent implements OnInit, OnDestroy {
       console.log("Width of Top Sellers is " + itemComponent.width)
       this.topSellersWidth=itemComponent.width;
       this.topSellersHeight=itemComponent.height;
-      this.store.dispatch(new TableWidgetResized());
+      this.store.dispatch(new TableWidgetResized(itemComponent.width,itemComponent.height));
+    }
+    if (item.widgetId === WidgetType.agGridChart) {
+      console.log("Width of AG Chart is " + itemComponent.width)
+      this.agChartWidth=itemComponent.width;
+      //TODO: create new store item
+      this.store.dispatch(new TableWidgetResized(itemComponent.width,itemComponent.height));
     }
     if (item.widgetId === WidgetType.DataTable) {
       console.log("Width of AG Grid is " + itemComponent.width)
       this.storePerformanceWidth=itemComponent.width;
-      this.store.dispatch(new TableWidgetResized());
+      this.store.dispatch(new TableWidgetResized(itemComponent.width,itemComponent.height));
+    }
+    if (item.widgetId === WidgetType.SDR) {
+      this.SDRWidth = itemComponent.width;
+      console.log("Width of SDR is " + this.SDRWidth)
+      this.store.dispatch(new SDRWidgetResized(itemComponent.width,itemComponent.height));
     }
     if (item.widgetId === WidgetType.LineChart) {
       this.vegaLength = itemComponent.height;
       this.vegaWidth = itemComponent.width;
       console.log("Width of Chart is " + this.vegaLength)
-      this.store.dispatch(new VegaWidgetResized());
+      this.store.dispatch(new VegaWidgetResized(itemComponent.width,itemComponent.height));
     }
   };
 
@@ -100,6 +140,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
     itemResizeCallback: this.onItemResize,
     itemInitCallback: this.onItemInit
   };
+
+  
 
   @HostListener("window:resize", ["$event"])
   onResize(event: Event): void {
