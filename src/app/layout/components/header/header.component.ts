@@ -4,7 +4,10 @@ import * as uuid from 'uuid';
 import { select, Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
 import { ThemeService } from "src/app/core/services/theme.service";
-import { GridService } from "src/app/core/services/grid.service";
+import { WidgetModule } from "src/app/widget/widget.module";
+import { WidgetType } from "src/app/widget/models/widget.model";
+import { WidgetItem } from "src/app/layout/models/widget.model";
+import {mainContentWidgets} from "src/app/layout/components/main-content/main-content-data";
 import {
   SetDarkTheme,
   SetLightTheme
@@ -20,6 +23,7 @@ import { ModalComponent } from "../modal/modal.component";
 export class HeaderComponent {
   @ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
   theme: string;
+  widgets: WidgetItem[] = mainContentWidgets;
 
 
 
@@ -27,8 +31,7 @@ export class HeaderComponent {
 
   constructor(
     private store: Store<AppState>,
-    private themeService: ThemeService,
-    private gridService: GridService
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -50,14 +53,16 @@ export class HeaderComponent {
     }
   }
 
+  compact(): void {
+    this.widgets.shift()
+  }
+
   addWidget(): void {
-      console.log("adding panel")
-      this.gridService.addWidget("New")    
+    this.widgets.push({widgetId:7,widgetName:"New",x:1,y:1, rows:3, cols:2});
   }
 
   removeWidget(id: string): void {
-    //const item = this.layout.find(d => d.id === id);
-    //this.layout.splice(this.layout.indexOf(item), 1);
+
   }
 
   onDarkTheme(): void {
