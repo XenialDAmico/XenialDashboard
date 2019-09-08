@@ -19,7 +19,10 @@ import {
   TableWidgetResized,
   WindowResized,
   VegaWidgetResized,
-  SDRWidgetResized
+  SDRWidgetResized,
+  StoreSalesWidgetResized,
+  WordCloudWidgetResized,
+  CategorySalesWidgetResized
 } from "../../store/actions/layout.actions";
 
 import { gridConfig } from "./grid-config";
@@ -38,12 +41,23 @@ export class MainContentComponent implements OnInit, OnDestroy {
   //Create a function to retrieve this.
   vegaLength: number;
   vegaWidth: number;
+
   topSellersHeight: number;
   topSellersWidth: number;
+
   storePerformanceWidth: number;
   agChartWidth: number;
   SDRWidth: number;
 
+  storeSalesWidth: number;
+  storeSalesHeight: number;
+
+  catSalesWidth: number;
+  catSalesHeight: number;
+  
+  wordCloudWidth: number;
+  wordCloudHeight: number;
+  
 
   private themeSubscription: Subscription;
 
@@ -122,8 +136,26 @@ export class MainContentComponent implements OnInit, OnDestroy {
     if (item.widgetId === WidgetType.LineChart) {
       this.vegaLength = itemComponent.height;
       this.vegaWidth = itemComponent.width;
-      console.log("Width of Chart is " + this.vegaLength)
+      console.log("Width of Labor Line Chart is " + this.vegaLength)
       this.store.dispatch(new VegaWidgetResized(itemComponent.width,itemComponent.height));
+    }
+    if (item.widgetId === WidgetType.StoreSales) {
+      this.storeSalesWidth=itemComponent.width;
+      this.storeSalesHeight=itemComponent.height;
+      console.log("Width of Store Sales Chart is " + this.storeSalesWidth)
+      this.store.dispatch(new StoreSalesWidgetResized(this.storeSalesWidth,this.storeSalesHeight));
+    }
+    if (item.widgetId === WidgetType.PieChart) {
+      this.catSalesWidth=itemComponent.width;
+      this.catSalesHeight=itemComponent.height;
+      console.log("Width of Pie Chart is " + this.catSalesWidth)
+      this.store.dispatch(new CategorySalesWidgetResized(this.catSalesWidth,this.catSalesHeight));
+    }
+    if (item.widgetId === WidgetType.WordCloud) {
+      this.wordCloudWidth=itemComponent.width;
+      this.wordCloudHeight=itemComponent.height;
+      console.log("Width of Word Cloud is " + this.wordCloudWidth)
+      this.store.dispatch(new WordCloudWidgetResized(this.wordCloudWidth,this.wordCloudHeight));
     }
   };
 

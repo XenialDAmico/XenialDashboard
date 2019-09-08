@@ -15,16 +15,16 @@ export const LineChartInitConfig: Spec = {
     {
       "name": "table",
       "values": [
-        {"x": 0, "y": 28, "c":0}, {"x": 0, "y": 55, "c":1},
-        {"x": 1, "y": 43, "c":0}, {"x": 1, "y": 91, "c":1},
-        {"x": 2, "y": 81, "c":0}, {"x": 2, "y": 53, "c":1},
-        {"x": 3, "y": 19, "c":0}, {"x": 3, "y": 87, "c":1},
-        {"x": 4, "y": 52, "c":0}, {"x": 4, "y": 48, "c":1},
-        {"x": 5, "y": 24, "c":0}, {"x": 5, "y": 49, "c":1},
-        {"x": 6, "y": 87, "c":0}, {"x": 6, "y": 66, "c":1},
-        {"x": 7, "y": 17, "c":0}, {"x": 7, "y": 27, "c":1},
-        {"x": 8, "y": 68, "c":0}, {"x": 8, "y": 16, "c":1},
-        {"x": 9, "y": 49, "c":0}, {"x": 9, "y": 15, "c":1}
+        {"x": "6A", "y": 28, "c":"Front of House"}, {"x": "6A", "y": 55, "c":"Back of House"},
+        {"x": "7A", "y": 43, "c":"Front of House"}, {"x": "7A", "y": 91, "c":"Back of House"},
+        {"x": "8A", "y": 81, "c":"Front of House"}, {"x": "8A", "y": 53, "c":"Back of House"},
+        {"x": "9A", "y": 19, "c":"Front of House"}, {"x": "9A", "y": 87, "c":"Back of House"},
+        {"x": "10A", "y": 52, "c":"Front of House"}, {"x": "10A", "y": 48, "c":"Back of House"},
+        {"x": "11A", "y": 24, "c":"Front of House"}, {"x": "11A", "y": 49, "c":"Back of House"},
+        {"x": "12P", "y": 87, "c":"Front of House"}, {"x": "12P", "y": 66, "c":"Back of House"},
+        {"x": "1P", "y": 17, "c":"Front of House"}, {"x": "1P", "y": 27, "c":"Back of House"},
+        {"x": "2P", "y": 68, "c":"Front of House"}, {"x": "2P", "y": 16, "c":"Back of House"},
+        {"x": "3P", "y": 49, "c":"Front of House"}, {"x": "3P", "y": 15, "c":"Back of House"}
       ],
       "transform": [
         {
@@ -36,7 +36,39 @@ export const LineChartInitConfig: Spec = {
       ]
     }
   ],
-
+  "legends": [
+    {
+      "fill": "color",
+      "encode": {
+        "title": {
+          "update": {
+            "fontSize": {"value": 14}
+          }
+        },
+        "labels": {
+          "interactive": true,
+          "update": {
+            "fontSize": {"value": 12},
+            "fill": {"value": "black"}
+          },
+          "hover": {
+            "fill": {"value": "firebrick"}
+          }
+        },
+        "symbols": {
+          "update": {
+            "stroke": {"value": "transparent"}
+          }
+        },
+        "legend": {
+          "update": {
+            "stroke": {"value": "#ccc"},
+            "strokeWidth": {"value": 1.5}
+          }
+        }
+      }
+    }
+  ],
   "scales": [
     {
       "name": "x",

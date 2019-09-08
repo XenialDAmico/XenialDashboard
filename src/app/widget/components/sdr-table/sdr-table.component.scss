@@ -2,3 +2,17 @@
 @import 'ag-grid-community/dist/styles/ag-grid.css';
 @import 'ag-grid-community/dist/styles/ag-theme-balham-dark.css';
 @import 'ag-grid-community/dist/styles/ag-theme-material.css';
+
+
+.ag-header .ag-header-cell-label .ag-header-cell-text{
+    font-size: larger;
+    font-weight: bold;
+    margin-top: 5px;
+    /*Since we are rotating a span*/
+    display: inline-block;
+}
+
+.ag-floating-filter-body input {
+    font-size: 15px;
+    font-weight: bold;
+}

@@ -20,9 +20,9 @@ export class ModalComponent {
     this.open = true;
   }
 
-  addItem(id:number): void {
+  addItem(id:number, name:string): void {
     //var name = this.widgets.find()
-    this.widgets.push({widgetId:id,widgetName:"New",x:1,y:1, rows:2, cols:2});
+    this.widgets.push({widgetId:id,widgetName:name,x:1,y:1, rows:2, cols:4});
   }
   
 }

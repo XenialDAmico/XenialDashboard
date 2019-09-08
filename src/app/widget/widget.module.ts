@@ -10,9 +10,11 @@ import { DataTableComponent } from "./components/data-table/data-table.component
 import { SDRComponent  } from "./components/sdr-table/sdr-table.component";
 import { DynamicWidgetComponent } from "./components/dynamic-widget/dynamic-widget.component";
 import { PieChartComponent } from "./components/pie-chart/pie-chart.component";
+import { StoreSalesChartComponent } from "./components/store-sales-chart/store-sales.component";
 import { LineChartComponent } from "./components/line-chart/line-chart.component";
 import { TopSellersComponent } from "./components/top-sellers/top-sellers.component";
 import { agChartComponent } from "./components/ag-chart/ag-chart.component";
+import { WordCloudComponent } from "./components/word-cloud/word-cloud.component";
 import { TextComponent } from "./components/text/text.component";
 import { DynamicWidgetDirective } from "./directives/dynamic-widget.directive";
 import { WidgetService } from "./services/dynamic-widget.service";
@@ -35,10 +37,12 @@ import { WidgetService } from "./services/dynamic-widget.service";
     DataTableComponent,
     TopSellersComponent,
     SDRComponent,
+    StoreSalesChartComponent,
+    WordCloudComponent,
     agChartComponent
   ],
   exports: [DynamicWidgetComponent],
   providers: [WidgetService],
-  entryComponents: [SDRComponent,DataTableComponent,TopSellersComponent,agChartComponent]
+  entryComponents: [WordCloudComponent,StoreSalesChartComponent,SDRComponent,DataTableComponent,TopSellersComponent,agChartComponent]
 })
 export class WidgetModule {}

@@ -6,7 +6,9 @@ export enum WidgetType {
   LineChart = 5,
   TopSellers = 6,
   agGridChart = 7,
-  SDR = 8
+  SDR = 8,
+  StoreSales = 9,
+  WordCloud = 10
 }
 
 export enum WidgetName {
@@ -17,5 +19,7 @@ export enum WidgetName {
   LineChart = "Labor Cost",
   TopSellers = "Top Sellers",
   agGridChart = "Sales by Date",
-  SDR = "Sales Summary"
+  SDR = "Sales Summary",
+  StoreSales = "Net Sales by Store",
+  WordCloud = "Item Comments Cloud"
 }

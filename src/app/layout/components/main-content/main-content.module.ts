@@ -7,6 +7,8 @@ import { LineChartComponent } from "src/app/widget/components/line-chart/line-ch
 import { TopSellersComponent } from "src/app/widget/components/top-sellers/top-sellers.component";
 import { agChartComponent } from "src/app/widget/components/ag-chart/ag-chart.component";
 import { SDRComponent } from "src/app/widget/components/sdr-table/sdr-table.component";
+import { WordCloudComponent } from "src/app/widget/components/word-cloud/word-cloud.component";
+import { StoreSalesChartComponent } from "src/app/widget/components/store-sales-chart/store-sales.component";
 import { TextComponent } from "src/app/widget/components/text/text.component";
 import { WidgetModule } from "src/app/widget/widget.module";
 import { MainContentComponent } from "./main-content.component";
@@ -15,6 +17,6 @@ import { MainContentComponent } from "./main-content.component";
   declarations: [MainContentComponent],
   imports: [CommonModule, GridsterModule, WidgetModule],
   exports: [MainContentComponent],
-  entryComponents: [SDRComponent,TextComponent, PieChartComponent, BarChartComponent, LineChartComponent,TopSellersComponent,agChartComponent]
+  entryComponents: [WordCloudComponent,StoreSalesChartComponent,SDRComponent,TextComponent, PieChartComponent, BarChartComponent, LineChartComponent,TopSellersComponent,agChartComponent]
 })
 export class MainContentModule {}

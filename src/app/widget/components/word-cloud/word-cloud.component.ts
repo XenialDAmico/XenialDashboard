@@ -8,20 +8,20 @@ import { getThemeType } from "src/app/core/store/reducers/theme.reducer";
 import {
   LayoutActionTypes,
   WindowResized,
-  VegaWidgetResized
+  WordCloudWidgetResized
 } from "src/app/layout/store/actions/layout.actions";
-import { LineChartInitConfig } from "./line-chart-options";
+import { WordCloudInitConfig } from "./word-cloud-options";
 import { MainContentComponent } from "src/app/layout/components/main-content/main-content.component"
 
 
 
 @Component({
-  selector: "app-line-chart",
-  templateUrl: "./line-chart.component.html",
-  styleUrls: ["./line-chart.component.scss"]
+  selector: "word-cloud-chart",
+  templateUrl: "./word-cloud.component.html",
+  styleUrls: ["./word-cloud.component.scss"]
 })
 
-export class LineChartComponent implements OnInit, OnDestroy {
+export class WordCloudComponent implements OnInit, OnDestroy {
   view: any;
   theme: string;
  
@@ -34,16 +34,16 @@ export class LineChartComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    var width = this.thisGridster.vegaWidth;
-    width = width - 30;
+    var width = this.thisGridster.wordCloudWidth;
+    width = width;
     //var width = this.vegaConfigService.getChartWidth(".gridster-item-content");
-    console.log("Width is resized to " + width)
-    var length = this.thisGridster.vegaLength;
-    length = length - 60;
-    console.log("Length is resized to " + length)
-    console.log("embedding..");
+    console.log("Word Cloud Width is resized to " + width)
+    var height = this.thisGridster.wordCloudHeight;
+
+    height = height;
+    console.log("Word Cloud Height is resized to " + height)
      //this.view = embed.default('#vega',LineChartInitConfig,vegaOpts);
-     this.view = this.vegaConfigService.vegaInit("vega",LineChartInitConfig,width,length); 
+     this.view = this.vegaConfigService.vegaInit("word-cloud",WordCloudInitConfig,width,height); 
 
 
     this.themeSubscription = this.store
@@ -53,15 +53,15 @@ export class LineChartComponent implements OnInit, OnDestroy {
     });
 
   this.resizeSubscription = this.action$
-    .pipe(ofType<VegaWidgetResized>(LayoutActionTypes.VegaWidgetResized))
+    .pipe(ofType<WordCloudWidgetResized>(LayoutActionTypes.WordCloudWidgetResized))
     .subscribe(() => {
-      var width = this.thisGridster.vegaWidth;
+      var width = this.thisGridster.wordCloudWidth;
       width = width - 30 ;
-      console.log("Width is resized to " + width)
-      var length = this.thisGridster.vegaLength;
-      length = length - 70;
-      console.log("Length is resized to " + length)
-      this.resizeVegaChart(width,length)});
+      console.log("Word Cloud Width is resized to " + width)
+      var height = this.thisGridster.wordCloudHeight;
+      height = height - 70;
+      console.log("Word Cloud Height is resized to " + height)
+      this.resizeVegaChart(width,height)});
   }
 
   ngOnDestroy(): void {
@@ -69,11 +69,11 @@ export class LineChartComponent implements OnInit, OnDestroy {
     this.resizeSubscription.unsubscribe();
   }
 
-  resizeVegaChart(width,length): void {
+  resizeVegaChart(width,height): void {
     if (this.view) {
       setTimeout(() => {
-        console.log("resizing Vega Chart..")
-        this.vegaConfigService.vegaInit("vega",LineChartInitConfig,width,length); 
+        console.log("resizing Word Cloud Chart..")
+        this.vegaConfigService.vegaInit("word-cloud",WordCloudInitConfig,width,height); 
         
       }, 400);
     }

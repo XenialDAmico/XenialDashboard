@@ -1,9 +1,12 @@
 
-<ag-grid-angular class="ag-theme-material"
+<ag-grid-angular 
+#sdr
+class="ag-theme-balham"
 style="width: 100%; height: 100%;" 
 [rowData]="rowData" 
 [gridOptions]="gridOptions"
 [columnDefs]="columnDefs"
+[frameworkComponents]="frameworkComponents"
 (gridReady)="onGridReady($event)"
 (gridSizeChanged)="onGridSizeChanged($event)"
 >
