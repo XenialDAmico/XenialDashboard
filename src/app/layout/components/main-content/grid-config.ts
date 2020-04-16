@@ -6,51 +6,32 @@ import {
 } from "angular-gridster2";
 
 export const gridConfig: GridsterConfig = {
-  gridType: GridType.ScrollVertical,
-  compactType: CompactType.None,
-  margin: 15,
+  columns: 6, // number of columns in the grid
+  pushing: true, // whether to push other items out of the way
+  floating: true, // whether to automatically float items up so they stack
+  swapping: false, // whether or not to have items switch places instead of push down if they are the same size
+  width: 'auto', // width of the grid. "auto" will expand the grid to its parent container
+  colWidth: 'auto', // width of grid columns. "auto" will divide the width of the grid evenly among the columns
+  rowHeight: 'match', // height of grid rows. 'match' will make it the same as the column width, a numeric value will be interpreted as pixels, '/2' is half the column width, '*5' is five times the column width, etc.
+  margins: [10, 10], // margins in between grid items
   outerMargin: true,
-  outerMarginTop: null,
-  outerMarginRight: null,
-  outerMarginBottom: null,
-  outerMarginLeft: null,
-  useTransformPositioning: true,
-  mobileBreakpoint: 640,
-  minCols: 4,
-  maxCols: 12,
-  minRows: 2,
-  maxRows: 100,
-  maxItemCols: 100,
-  minItemCols: 2,
-  maxItemRows: 100,
-  minItemRows: 2,
-  maxItemArea: 2500,
-  minItemArea: 1,
-  defaultItemCols: 1,
-  defaultItemRows: 1,
-  fixedColWidth: 105,
-  fixedRowHeight: 105,
-  keepFixedHeightInMobile: false,
-  keepFixedWidthInMobile: false,
-  scrollSensitivity: 10,
-  scrollSpeed: 40,
-  enableEmptyCellClick: false,
-  enableEmptyCellContextMenu: false,
-  enableEmptyCellDrop: false,
-  enableEmptyCellDrag: false,
-  emptyCellDragMaxCols: 50,
-  emptyCellDragMaxRows: 50,
-  ignoreMarginInRow: false,
-  draggable: { enabled: true },
-  resizable: { enabled: true },
-  swap: true,
-  pushItems: true,
-  disablePushOnDrag: false,
-  disablePushOnResize: false,
-  pushDirections: { north: true, east: true, south: true, west: true },
-  pushResizeItems: false,
-  displayGrid: DisplayGrid.OnDragAndResize,
-  disableWindowResize: false,
-  disableWarnings: false,
-  scrollToNewItems: false
+  isMobile: false, // toggle mobile view
+  mobileBreakPoint: 600, // width threshold to toggle mobile mode
+  mobileModeEnabled: true, // whether or not to toggle mobile mode when screen width is less than mobileBreakPoint
+  minColumns: 1, // minimum amount of columns the grid can scale down to
+  minRows: 1, // minimum amount of rows to show if the grid is empty
+  maxRows: 100, // maximum amount of rows in the grid
+  defaultSizeX: 2, // default width of an item in columns
+  defaultSizeY: 1, // default height of an item in rows
+  minSizeX: 1, // minimum column width of an item
+  maxSizeX: null, // maximum column width of an item
+  minSizeY: 1, // minumum row height of an item
+  maxSizeY: null, // maximum row height of an item
+  saveGridItemCalculatedHeightInMobile: false, // grid item height in mobile display. true- to use the calculated height by sizeY given
+  resizable: { // options to pass to resizable handler
+    enabled: true
+  },
+  draggable: { // options to pass to draggable handler
+    enabled: true
+    }
 };
